@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Rana René - Hamburguesas & Tacos</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- AOS Animations -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --negro: #181818;
+      --naranja: #ff6f00;
+      --nama:rgb(255, 179, 0);
+      --blanco: #fff;
+      --gris: #f2f2f2;
+      --grisosc: #383838c0;
+      --verde-rana: #66bb6a;
+    }
+    body {
+      background: var(--gris);
+      margin: 0;
+      font-family: 'Segoe UI', 'Montserrat', sans-serif;
+      color: var(--negro);
+    }
+    /* Navbar elegante */
+    .navbar {
+      background: var(--blanco);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding: 0.7rem 2rem;
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--naranja) !important;
+      letter-spacing: 2px;
+    }
+    .navbar-nav {
+      margin: 0 auto;
+    }
+    .nav-link {
+      color: var(--negro) !important;
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin: 0 1.2rem;
+      transition: color 0.2s;
+    }
+    .nav-link.active, .nav-link:hover {
+      color: var(--naranja) !important;
+    }
+    /* Hero */
+    .hero-section {
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('llamas.jpeg') center center/cover no-repeat; /* Cambia 'fondo-hero.jpg' por tu imagen */
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content {
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: 5vw;
+    }
+    .hero-title {
+      font-size: 5rem;
+      color: var(--blanco);
+      font-weight: bold;
+      margin-bottom: 1.2rem;
+    }
+    .hero-btn {
+      background: var(--verde-rana);
+      color: var(--blanco);
+      border: none;
+      border-radius: 10px;
+      padding: 16px 36px;
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      transition: background 0.3s;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .hero-btn:hover {
+      background: #4caf50;
+      color: var(--blanco);
+    }
+    .hero-img-container {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100vh;
+      position: relative; /* Asegura posicionamiento absoluto de las imágenes */
+      min-width: 350px;   /* Opcional: asegura espacio mínimo para las imágenes */
+    }
+    .hero-img {
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+      animation: floatY 2.5s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .hero-img-fade {
+      position: absolute;
+      right: 0;
+      top: 10%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 1s;
+      z-index: 1;
+      width: 700px;         /* Fuerza el mismo ancho */
+      height: 700px;        /* Fuerza el mismo alto */
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+      /* Elimina cualquier margen o padding extra */
+      background: transparent;
+      display: block;
+    }
+    .hero-img-fade.active {
+      opacity: 1;
+      z-index: 2;
+    }
+    @keyframes floatY {
+      0% { transform: translateY(0);}
+      100% { transform: translateY(30px);}
+    }
+    /* Parallax efecto al hacer scroll */
+    .hero-img-container {
+      transition: transform 0.5s;
+    }
+    /* Menu Cards */
+    .menu-section {
+      background: var(--gris);
+      padding: 80px 0 60px 0;
+    }
+    .menu-section h2 {
+      color: var(--naranja);
+      font-weight: bold;
+      margin-bottom: 2.5rem;
+    }
+    .card-menu {
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .card-menu:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    }
+    .card-menu img {
+      height: 180px;
+      object-fit: cover;
+    }
+    /* Misión y Visión */
+    .mv-section {
+      background: var(--negro);
+      padding: 70px 0 60px 0;
+    }
+    .mv-section h2 {
+      color: var(--naranja);
+      font-weight: bold;
+      margin-bottom: 2.5rem;
+    }
+    .card-mv {
+      background: var(--blanco);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2rem 1.5rem;
+      color: var(--negro);
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      border: none;
+    }
+    /* Footer */
+    footer {
+      background: var(--naranja);
+      color: var(--blanco);
+      padding: 30px 0 10px 0;
+      text-align: center;
+    }
+    .footer-icons a {
+      color: var(--blanco);
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: color 0.2s;
+    }
+    .footer-icons a:hover {
+      color: var(--negro);
+    }
+    @media (max-width: 991px) {
+      .hero-section {
+        flex-direction: column;
+        padding-top: 20px; /* Reduce el espacio superior */
+        text-align: center;
+      }
+      .hero-content {
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .hero-img-container {
+        height: auto;
+        display: flex;
+        justify-content: center; /* Centra las imágenes horizontalmente */
+        align-items: flex-start; /* Alinea las imágenes más arriba */
+        margin-top: -10px; /* Reduce el espacio entre el botón y la imagen */
+      }
+      .hero-img {
+        max-width: 90%; /* Ajusta el tamaño de las imágenes */
+        max-height: 60vh; /* Ajusta la altura máxima */
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 2.5rem; /* Ajusta el tamaño del título */
+      }
+      .hero-btn {
+        font-size: 1rem; /* Ajusta el tamaño del botón */
+        padding: 12px 24px;
+        margin-bottom: 10px; /* Reduce el espacio inferior del botón */
+      }
+      .hero-img-container {
+        margin-top: -150px; /* Mueve las imágenes más cerca del botón */
+      }
+      .hero-img {
+        max-width: 95%; /* Aumenta el tamaño de las imágenes */
+        max-height: 40vh; /* Ajusta la altura máxima */
+      }
+    }
+     .fade {
+    opacity: 0;
+    transition: opacity 0.8s ease; /* Velocidad y suavidad de transición */
+  }
+  .show {
+    opacity: 1;
+  }
+  </style>
+  <!-- Google Fonts para el nombre elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid p-0">
+      <img src="logo.png" alt="Logo La Rana René" style="height:40px; width:auto; margin-left:16px; margin-right:18px;">
+      <a class="navbar-brand mx-auto" href="#">
+        La Rana René
+      </a>
+      <div class="collapse navbar-collapse justify-content-center">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu">Menú</a></li>
+          <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section d-flex" id="home">
+    <div class="hero-content align-self-center">
+      <h1 class="hero-title" id="hero-slogan">¡Sabor que salta de alegría!</h1>
+      <a href="https://wa.me/6771033118" class="hero-btn" target="_blank" rel="noopener">
+        <i class="bi bi-whatsapp"></i> Ordenar por WhatsApp
+      </a>
+    </div>
+    <div class="hero-img-container align-self-center" id="parallax-img">
+      <img src="ham.png" alt="La Rana René" class="hero-img hero-img-fade active" />
+      <img src="taco.png" alt="Taco" class="hero-img hero-img-fade" />
+    </div>
+  </section>
+
+  <!-- Menú Section -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <h2 class="text-center mb-5">Nuestro Menú</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card card-menu">
+            <img src="ham.png" class="card-img-top" alt="Hamburguesa Clásica">
+            <div class="card-body">
+              <h5 class="card-title"><i class=""></i>CLASICA</h5>
+              <p class="card-text">Carne 100% casera, queso, jamon, lechuga, jitomate, cebolla, chiles y aderezos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card card-menu">
+            <img src="taco.png" class="card-img-top" alt="Taco de Asada">
+            <div class="card-body">
+              <h5 class="card-title"><i class=""></i> TACOS DE ASADA</h5>
+              <p class="card-text">Orden de 5 tacos, con cebolla asada, cebolla con cilantro, repollo y salsas de la casa.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-menu">
+            <img src="hawa.jpeg" class="card-img-top" alt="hawaina">
+            <div class="card-body">
+              <h5 class="card-title"><i class=""></i>HAWAIANA</h5>
+              <p class="card-text">Carne 100% casera, piña, queso, lechuga, jitomate, cebolla, chiles y aderezos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-menu">
+            <img src="cebolla.jpeg" class="card-img-top" alt="asada">
+            <div class="card-body">
+              <h5 class="card-title"><i class=""></i>ASADA</h5>
+              <p class="card-text">Carne 100% casera, carne asada, cebolla asada, queso, lechuga, jitomate, cebolla, chiles y aderezos.</p>
+            </div>
+          </div>
+        </div>
+         <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-menu">
+            <img src="gringa.jpeg" class="card-img-top" alt="gasada">
+            <div class="card-body">
+              <h5 class="card-title"><i class=""></i>GRINGA DE ASADA</h5>
+              <p class="card-text">Tortilla de harina, queso, carne asada y cebolla asada.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-menu">
+            <img src="moster.jpeg" class="card-img-top" alt="moster">
+            <div class="card-body">
+              <h5 class="card-title"><i class=""></i>MOSTER</h5>
+              <p class="card-text">2 Carnes, 2 quesos, 2 jamones, carne asada, piña, jitomate, lechuga, cebolla asada, chiles, aderezos</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-menu">
+            <img src="papas.jpeg" class="card-img-top" alt="moster">
+            <div class="card-body">
+              <h5 class="card-title"><i class=""></i>PAPAS</h5>
+              <p class="card-text">Orden de papas fritas 100% naturales</p>
+            </div>
+          </div>
+        </div>
+        <!-- Agrega más tarjetas de menú aquí si lo deseas -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Misión y Visión Section -->
+  <section class="mv-section" id="nosotros">
+    <div class="container">
+      <h2 class="text-center mb-5">Misión & Visión</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-5 mb-4" data-aos="fade-right">
+          <div class="card-mv">
+            <h5 class="mb-3"><i class="bi bi-bullseye"></i> Misión</h5>
+            <p>"Brindar tacos, hamburguesas y bebidas de la más alta calidad, satisfaciendo 
+              las necesidades gastronómicas de nuestros clientes con una amplia variedad de productos
+              y un servicio cálido, generando un impacto positivo y asumiendo con compromiso nuestra 
+              responsabilidad social."</p>
+          </div>
+        </div>
+        <div class="col-md-5 mb-4" data-aos="fade-left">
+          <div class="card-mv">
+            <h5 class="mb-3"><i class="bi bi-eye"></i> Visión</h5>
+            <p>"Ser reconocidos como la mejor opción en tacos y hamburguesas del municipio, 
+              destacándonos por nuestra originalidad, solidez y profesionalismo, con un equipo 
+              de gran calidad humana y sólidos principios éticos. Ofrecer productos y servicios 
+              de excelencia, consolidando nuestra microempresa como una organización altamente productiva, 
+              innovadora, competitiva y comprometida con la satisfacción total de nuestros clientes."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="mb-2">
+        <i class="bi bi-geo-alt"></i> Calle Independencia #111, Rodeo, DGO.
+        &nbsp;|&nbsp;
+        <i class="bi bi-telephone"></i> 677-103-3118
+        &nbsp;|&nbsp;
+      </div>
+      <div class="footer-icons mb-2">
+        <a href="https://facebook.com/" target="_blank" rel="noopener" title="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/hamburguesas_y_tacos_larana?igsh=MWxrYmtpMWtmMnJmOQ==" target="_blank" rel="noopener" title="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://wa.me/6771033118" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+      <div>
+        © 2025 La Rana René. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animations JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 900,
+      once: true
+    });
+
+    
+    window.addEventListener('scroll', function() {
+      const parallax = document.getElementById('parallax-img');
+      let offset = window.scrollY;
+      if (parallax) {
+        parallax.style.transform = 'translateY(' + offset * 0.2 + 'px)';
+      }
+    });
+
+    
+    let heroIndex = 0;
+    const imgs = document.querySelectorAll('.hero-img-fade');
+    function switchHeroImg() {
+      imgs.forEach((img, i) => img.classList.toggle('active', i === heroIndex));
+      
+      let delay = heroIndex === 1 ? 4000 : 4000; 
+      heroIndex = (heroIndex + 1) % imgs.length;
+      setTimeout(switchHeroImg, delay);
+    }
+    if (imgs.length > 0) {
+      switchHeroImg();
+    }
+
+  const slogans = [
+    "¡Sabor que salta de alegría!",
+    "Ya conoces nuestra ubicacion, ¿y tú qué esperas?",
+    "¡Ven y prueba la diferencia!"
+  ];
+  
+  let sloganIndex = 0;
+  const sloganElement = document.getElementById('hero-slogan');
+
+  function changeSlogan() {
+    
+    sloganElement.classList.remove('show');
+    sloganElement.classList.add('fade');
+
+    setTimeout(() => {
+      
+      sloganIndex = (sloganIndex + 1) % slogans.length;
+      sloganElement.textContent = slogans[sloganIndex];
+
+      
+      sloganElement.classList.add('show');
+    }, 800); 
+  }
+
+  
+  sloganElement.classList.add('show');
+
+  
+  setInterval(changeSlogan, 3500);
+
+
+ </script>  
+</body>
+</html>
